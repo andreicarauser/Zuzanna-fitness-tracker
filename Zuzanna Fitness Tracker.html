@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E9A8C2">
+<title>Zuzanna — Progressive</title>
+<style>
+:root{
+--site-primary:#E9A8C2;--site-secondary:#F7DCE7;--site-background:#FFFFFF;
+--site-on-primary:#3B1D2A;--site-on-secondary:#4B2C39;--site-on-background:#291C22;
+--site-font-body:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+--site-font-heading:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+--site-heading-scale:1;--site-spacing-scale:1;--site-radius-scale:1;--site-decoration-opacity:1;color-scheme:light dark}
+*{box-sizing:border-box}body{margin:0;font-family:var(--site-font-body);background:#fff;color:var(--site-on-background)}
+#app{min-height:100vh;background:var(--site-background);color:var(--site-on-background);border-radius:0}
+.shell{max-width:1180px;margin:auto;padding:24px calc(22px * var(--site-spacing-scale)) 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--site-primary);color:var(--site-on-primary);font-weight:900}
+h1,h2,h3{font-family:var(--site-font-heading);margin:0;line-height:1.08}h1{font-size:calc(26px * var(--site-heading-scale));letter-spacing:-.04em}h2{font-size:calc(20px * var(--site-heading-scale));letter-spacing:-.03em}
+.muted{color:#816974}.top-actions{display:flex;gap:8px}
+button{font:inherit;border:0;cursor:pointer}.btn{padding:10px 13px;border-radius:12px;background:#fff;border:1px solid #edd8e1;color:#553542;font-weight:750}.btn.primary{background:var(--site-primary);border-color:var(--site-primary);color:var(--site-on-primary)}
+.hero{display:grid;grid-template-columns:1.45fr 1fr;gap:16px;margin-bottom:16px}.card{background:#fff;border:1px solid #efdce4;border-radius:calc(20px * var(--site-radius-scale));padding:18px;box-shadow:0 8px 28px rgba(85,43,61,.06)}
+.hero-main{padding:23px;position:relative;overflow:hidden}.hero-main:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-60px;top:-65px;background:var(--site-secondary);opacity:var(--site-decoration-opacity)}
+.hero-copy{max-width:600px;position:relative;z-index:1}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:900;color:#B65E82;margin-bottom:7px}
+.hero-copy p{margin:10px 0 17px;color:#745963;line-height:1.5}.week{display:flex;gap:7px;flex-wrap:wrap}.day{padding:9px 11px;border-radius:12px;background:#fbf0f5;color:#6d4a58;font-weight:800;font-size:12px}.day.active{background:var(--site-primary);color:var(--site-on-primary)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{padding:12px;border-radius:14px;background:#fff8fb;border:1px solid #f2e0e7}.stat b{display:block;font-size:18px}.stat span{font-size:10px;color:#866d76}
+.progressbar{height:8px;background:#f4e5eb;border-radius:99px;overflow:hidden;margin:11px 0}.progressbar span{display:block;height:100%;width:0;background:var(--site-primary);border-radius:99px;transition:width .2s}
+.grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.workout-tabs{display:flex;gap:7px;margin-bottom:12px}.tab{flex:1;padding:10px;border-radius:12px;background:#faf0f4;color:#694653;font-weight:900}.tab.active{background:var(--site-primary);color:var(--site-on-primary)}
+.exercise{border:1px solid #f0dfe6;border-radius:16px;padding:13px;margin:9px 0;background:#fff}.ex-top{display:flex;justify-content:space-between;gap:10px;align-items:start}.ex-name{font-weight:900}.tag{font-size:9px;padding:5px 7px;border-radius:99px;background:var(--site-secondary);color:#7a3e55;font-weight:900;white-space:nowrap}
+.ex-note{font-size:12px;color:#806b73;margin:5px 0 11px;line-height:1.4}.set-row{display:grid;grid-template-columns:34px 1fr 1fr 40px;gap:6px;align-items:center;margin-top:6px}.set-row input:nth-of-type(3){display:none}.set-num{font-size:11px;font-weight:800;color:#9a7a85}
+input{width:100%;border:1px solid #ead8df;background:#fffafb;border-radius:9px;padding:8px 7px;font:inherit;font-size:13px;color:#3e2931;min-width:0}.check{width:38px;height:36px;border-radius:10px;background:#f7e8ee;color:#8c5870;font-weight:900}.check.done{background:#DDEFE6;color:#32634D}.add-set{width:100%;padding:8px;margin-top:7px;background:#fff4f8;border:1px dashed #e2b7c8;border-radius:10px;color:#8c4964;font-weight:800}
+.side-card{margin-bottom:16px}.pr{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid #f1e4e8}.pr:last-child{border-bottom:0}.pr small{display:block;color:#8a737b;margin-top:4px}.log{font-size:12px}.log-item{padding:9px 0;border-bottom:1px solid #f1e4e8}
+footer{text-align:center;color:#9b808a;font-size:11px;margin-top:20px}
+@media(max-width:850px){.hero,.grid{grid-template-columns:1fr}.shell{padding:17px 13px 30px}.card{padding:14px}}
+@media(max-width:520px){header{align-items:flex-start}.top-actions .btn:not(.primary){display:none}.set-row{grid-template-columns:28px 1fr 1fr 38px}.hero-main{padding:18px}}
+@media(prefers-color-scheme:dark){#app{--site-background:#FFFFFF;color:#291C22}.card,.exercise{background:#FFFFFF;border-color:#efdce4}.btn,input{background:#FFFFFF;color:#3e2931;border-color:#ead8df}.stat{background:#fff8fb;border-color:#f2e0e7}.day,.tab{background:#fbf0f5;color:#6d4a58}.day.active,.tab.active{background:var(--site-primary);color:var(--site-on-primary)}.ex-note,.muted,.stat span,.pr small{color:#816974}.progressbar{background:#f4e5eb}}
+</style>
+</head>
+<body><div id="app"><div class="shell">
+<header><button class="btn" onclick="goBack()">← Back</button><div class="brand"><div class="logo">Z</div><div><h1>Zuzanna</h1><div class="muted" style="font-size:12px">Progressive training tracker</div></div></div><div class="top-actions"><button class="btn" onclick="resetWeek()">Reset week</button><button class="btn primary" onclick="exportData()">Export data</button></div></header>
+<section class="hero"><div class="card hero-main"><div class="hero-copy"><div class="eyebrow">This week</div><h2>Build strength, one session at a time.</h2><p>Log every working set. Your history stays on this device so you can compare load, reps and performance over time.</p><div class="week"><span class="day active">Workout A</span><span class="day">Workout B</span><span class="day">Workout C</span></div></div></div>
+<div class="card"><div class="section-head"><h2>Session progress</h2><span id="count" class="tag">0 sets</span></div><div class="progressbar"><span id="progress"></span></div><div class="stats"><div class="stat"><b id="setsDone">0</b><span>sets logged</span></div><div class="stat"><b id="volume">0</b><span>kg × reps</span></div><div class="stat"><b id="best">—</b><span>best load</span></div></div></div></section>
+<div class="grid"><main class="card"><div class="section-head"><h2>Training log</h2><span class="muted" style="font-size:11px">Choose a workout</span></div><div class="workout-tabs"><button class="tab active" onclick="selectWorkout('A',this)">Workout A</button><button class="tab" onclick="selectWorkout('B',this)">Workout B</button><button class="tab" onclick="selectWorkout('C',this)">Workout C</button></div><div id="workoutTitle" class="muted" style="margin:0 0 7px;font-size:11px"></div><div id="exerciseList"></div><div id="workoutFeeling" style="margin-top:16px"></div></main>
+<aside><div class="card side-card"><div class="section-head"><h2>Progression</h2></div><div id="progression"></div></div><div class="card side-card"><div class="section-head"><h2>Recent log</h2><button class="btn" style="padding:5px 8px;font-size:10px" onclick="clearHistory()">Clear</button></div><div id="history" class="log"></div></div><div class="card"><div class="section-head"><h2>Warm-up</h2></div><div class="muted" style="font-size:12px;line-height:1.55"><b>1 · 3–5 min:</b> rower, elliptical or fan bike.<br><b>2 · 2–3 min:</b> dynamic movement and joint warm-up for the muscles and joints you'll use that day.</div></div></aside></div>
+<footer>Local browser storage · Export a JSON backup regularly.</footer></div></div>
+<script>
+const workouts={
+A:[
+["Barbell squats","3–5 × 3–5","Strength · 1–3 RIR","Start around the prescribed 30 kg if appropriate; keep 1–3 reps in reserve.","kg","reps"],
+["Single-leg leg press","2 / leg × 10–12","Hypertrophy · close to failure","Leg higher on platform. Do not lock the knees.","kg","reps"],
+["Lat pulldowns","3 × 8–10","Upper body","Moderate weight; controlled reps. Optional second-set dropset.","kg","reps"],
+["Cable kickbacks","3 / leg × 12–15","Hypertrophy · failure","Tiny squeeze at top; control the negative for about 2 seconds.","kg","reps"],
+["Tricep cable pulldowns","3 × 10","Superset 1 / 2","Pair with face pulls.","kg","reps"],
+["Face pulls","3 × 10–15","Superset 2 / 2","Squeeze the top of the shoulder blades together, not just the arms.","kg","reps"],
+["Elevated treadmill walk","1 × 10 min","Finisher","10-minute elevated walk.","—","min"]],
+B:[
+["Romanian deadlifts","3 × 6–8","Strength · not failure","Control down and drive up; stop before technique breaks down.","kg","reps"],
+["Shoulder press","3 × 10–12","Upper body","Dumbbell or machine; use a confident load.","kg","reps"],
+["Hip thrusts","2 × 10–12","Pause 1 sec","Pause at the top and squeeze.","kg","reps"],
+["Hip thrust back-off","1 × AMRAP","Back-off","Drop load by roughly 50%; extra volume close to failure.","kg","reps"],
+["Lateral raises","3 × 10","Upper body","Good load without momentum.","kg","reps"],
+["Hip abductions","3 × 12","Last set AMRAP","Lean slightly forward to target upper glutes.","kg","reps"],
+["Seated cable rows","3 × 12","Upper body · close to failure","Challenging, controlled pulls.","kg","reps"],
+["Elevated walk / StairMaster","1 × 10 min","Cardio finisher","Steady cardio; choose elevated walk or StairMaster.","—","min"]],
+C:[
+["Paused barbell squats","3–5 × 4","Strength · not failure","Pause each rep. Keep the set challenging without form breakdown.","kg","reps"],
+["Bicep curls","3 × 10","Upper body","Controlled, full-range reps.","kg","reps"],
+["Glute cable kickbacks","3 / leg × 12–15","Hypertrophy · failure","Tiny pause at squeeze; control the negative.","kg","reps"],
+["Knee pushups","2 × failure","Progress reps","Keep hips stable and elbows about 45° from the body.","—","reps"],
+["Box jumps","5 × 6","Power","Rest until breathing settles; prioritise crisp, safe reps.","—","jumps"],
+["Leg raises / Russian twists","2 × 10–15","Alternate weekly","Choose straight-leg raises or Russian twists; use both only if you feel well.","—","reps"]]};
+
+let state=JSON.parse(localStorage.getItem("zuzannaTracker")||"{}"),current="A";
+function goBack(){if(window.history.length>1)window.history.back();else if(current!=="A")selectWorkout("A",document.querySelectorAll(".tab")[0]);}
+function k(w,i,s){return w+"-"+i+"-"+s}
+function targetSets(w,i){let t=workouts[w][i][1];if(t.includes("5")&&t.includes("3"))return 3;if(t.startsWith("2"))return 2;if(t.startsWith("1"))return 1;return 3}
+function sets(w,i){return Math.max(targetSets(w,i),state[k(w,i,"rows")]||targetSets(w,i))}
+function entries(){return Object.entries(state).filter(([x,v])=>x.split("-").length===3&&v&&typeof v==="object")}
+function render(){let list=document.getElementById("exerciseList");list.innerHTML="";
+document.getElementById("workoutTitle").textContent=current==="A"?"Squat + posterior chain + upper body":current==="B"?"Hinge + glutes + shoulders + back":"Paused squat + arms + power + core";
+workouts[current].forEach((ex,i)=>{let wrap=document.createElement("div");wrap.className="exercise";wrap.innerHTML='<div class="ex-top"><div><div class="ex-name">'+ex[0]+'</div><div class="ex-note">'+ex[3]+'</div></div><span class="tag">'+ex[2]+'</span></div>';
+let rows=document.createElement("div");for(let s=0;s<sets(current,i);s++){let id=k(current,i,s),d=state[id]||{};rows.innerHTML+='<div class="set-row"><span class="set-num">S'+(s+1)+'</span><input placeholder="'+(ex[4]==="—"?"—":ex[4])+'" value="'+(d.w??"")+'" '+(ex[4]==="—"?"disabled":"")+' onchange="saveSet(\''+id+'\',\'w\',this.value)"><input placeholder="'+ex[5]+'" value="'+(d.r??"")+'" onchange="saveSet(\''+id+'\',\'r\',this.value)"><input placeholder="RIR" value="'+(d.rir??"")+'" onchange="saveSet(\''+id+'\',\'rir\',this.value)"><button class="check '+(d.done?"done":"")+'" onclick="toggleDone(\''+id+'\',this)">✓</button></div>'}
+ wrap.appendChild(rows);wrap.innerHTML+='<button class="add-set" onclick="addSet(\''+current+'\','+i+')">＋ Add set</button>';list.appendChild(wrap)});document.querySelectorAll('.set-row input:nth-of-type(3)').forEach(x=>x.remove());update();progression();history()}
+function saveSet(id,f,v){state[id]=state[id]||{};state[id][f]=v;localStorage.setItem("zuzannaTracker",JSON.stringify(state));update();progression();history()}
+function toggleDone(id,b){state[id]=state[id]||{};state[id].done=!state[id].done;b.classList.toggle("done",state[id].done);localStorage.setItem("zuzannaTracker",JSON.stringify(state));update();history()}
+function addSet(w,i){state[k(w,i,"rows")]=sets(w,i)+1;localStorage.setItem("zuzannaTracker",JSON.stringify(state));render()}
+function selectWorkout(w,b){current=w;document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");render();renderFeeling()}
+function update(){let es=entries(),done=es.filter(([x,v])=>v.done),vol=0,best=0;done.forEach(([x,v])=>{let wt=+v.w||0,r=+v.r||0;vol+=wt*r;best=Math.max(best,wt)});document.getElementById("setsDone").textContent=done.length;document.getElementById("count").textContent=done.length+" sets";document.getElementById("volume").textContent=Math.round(vol).toLocaleString();document.getElementById("best").textContent=best?best+" kg":"—";let total=workouts[current].reduce((a,_,i)=>a+sets(current,i),0),cur=done.filter(([x])=>x.startsWith(current+"-")).length;document.getElementById("progress").style.width=Math.min(100,cur/total*100)+"%"}
+function progression(){let box=document.getElementById("progression");box.innerHTML="";workouts[current].slice(0,6).forEach((ex,i)=>{let vals=entries().filter(([x,v])=>x.startsWith(current+"-"+i+"-")&&v.done).map(([x,v])=>+v.w||0).filter(Boolean),best=vals.length?Math.max(...vals):null;box.innerHTML+='<div class="pr"><div><b>'+ex[0]+'</b><small>Target '+ex[1]+'</small></div><strong>'+(best?best+" kg":"—")+"</strong></div>"})}
+function history(){let h=document.getElementById("history"),arr=entries().filter(([x,v])=>v.done).slice(-6).reverse();h.innerHTML=arr.length?arr.map(([x,v])=>{let [w,i,s]=x.split("-");return '<div class="log-item"><b>Workout '+w+'</b> · '+workouts[w][i][0]+'<br><span class="muted">'+(v.w?v.w+" kg × ":"")+(v.r||"—")+(v.rir!==undefined?" · "+v.rir+" RIR":"")+"</span></div>"}).join(""):'<div class="muted">Complete a set and it will appear here.</div>'}
+function saveFeeling(value){state["feeling-"+current]=value;localStorage.setItem("zuzannaTracker",JSON.stringify(state));renderFeeling()}
+function renderFeeling(){let box=document.getElementById("workoutFeeling"),value=state["feeling-"+current]||"";box.innerHTML='<div class="section-head"><h2>How did the workout feel today?</h2></div><div class="workout-tabs">'+["Easy","Medium","Hard"].map(x=>'<button class="tab '+(value===x?"active":"")+'" onclick="saveFeeling(\''+x+'\')">'+x+'</button>').join("")+'</div>'}
+function history(){let h=document.getElementById("history"),arr=entries().filter(([x,v])=>v.done).slice(-6).reverse();h.innerHTML=arr.length?arr.map(([x,v])=>{let [w,i,s]=x.split("-");return '<div class="log-item"><b>Workout '+w+'</b> · '+workouts[w][i][0]+'<br><span class="muted">'+(v.w?v.w+" kg × ":"")+(v.r||"—")+'</span></div>'}).join(""): '<div class="muted">Complete a set and it will appear here.</div>'}
+function clearHistory(){if(confirm("Clear all logged training data?")){state={};localStorage.removeItem("zuzannaTracker");render()}}
+function resetWeek(){if(confirm("Reset this week's logged sets?")){state={};localStorage.removeItem("zuzannaTracker");render()}}
+function exportData(){let blob=new Blob([JSON.stringify({app:"Zuzanna Progressive Tracker",exported:new Date().toISOString(),data:state},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="zuzanna-fitness-backup.json";a.click();URL.revokeObjectURL(a.href)}
+render();renderFeeling();
+</script>
+<!--sites-preview-theme:start-->
+<style data-sites-preview-theme>:root{--site-font-body:system-ui,sans-serif !important;--site-font-heading:system-ui,sans-serif !important}</style>
+<script type="application/json" data-sites-preview-theme>{"appearance":"custom","primary":"#e9a8c2","secondary":"#f7dce7","background":"#ffffff","typography":"modern","spacing":1,"roundness":1,"headingScale":1,"decorationOpacity":1}</script>
+<!--sites-preview-theme:end-->
+</body></html>
